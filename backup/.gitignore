@@ -1,0 +1,5 @@
+**/generated_plugins*
+**/linux/*
+**/macos/*
+**/windows/*
+.vscode/
