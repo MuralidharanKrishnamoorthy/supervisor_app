@@ -34,16 +34,16 @@ class NetworkService {
       );
 
       if (response.statusCode == 200) {
-        print("✅ Access Token: ${response.data['access_token']}");
+        print(" Access Token: ${response.data['access_token']}");
         return response.data['access_token'];
       } else {
         print(
-          "❌ Failed to fetch token: ${response.statusCode} ${response.data}",
+          " Failed to fetch token: ${response.statusCode} ${response.data}",
         );
         return null;
       }
     } catch (e) {
-      print("❗ Dio exception: $e");
+      print("Dio exception: $e");
       return null;
     }
   }
@@ -54,15 +54,15 @@ class NetworkService {
     required String password,
     required String servicemanType,
   }) async {
-    print("🔐 Attempting login...");
-    print("👤 Username: $username");
-    print("🔑 Password: $password");
-    print("🛠️ Service Type: $servicemanType");
+    print(" Attempting login...");
+    print(" Username: $username");
+    print(" Password: $password");
+    print(" Service Type: $servicemanType");
 
     final accessToken = await getAccessToken();
 
     if (accessToken == null) {
-      print("❌ Cannot proceed without token");
+      print(" Cannot proceed without token");
       return null;
     }
 
@@ -92,7 +92,7 @@ class NetworkService {
         data: jsonEncode(requestBody),
       );
 
-      print("📦 Login API Response (${response.statusCode}):");
+      print(" Login API Response (${response.statusCode}):");
       print(response.data);
 
       // !After successful login, store the access token
@@ -103,7 +103,7 @@ class NetworkService {
 
       return response;
     } catch (e) {
-      print("❗ Dio exception during login request: $e");
+      print(" Dio exception during login request: $e");
       return null;
     }
   }
@@ -120,7 +120,7 @@ class NetworkService {
 
     final String? accessTokens = authBox.get('authToken');
     if (accessTokens == null) {
-      print("❌ Cannot proceed without token");
+      print(" Cannot proceed without token");
       return null;
     }
     final accessToken = accessTokens;
@@ -151,20 +151,20 @@ class NetworkService {
         data: jsonEncode(requestBody),
       );
 
-      print("📦 Project API Response (${response.statusCode}):");
+      print(" Project API Response (${response.statusCode}):");
       print(response.data);
 
       if (response.statusCode == 200) {
-        print("✅ Projects fetched successfully!");
+        print(" Projects fetched successfully!");
         return response;
       } else {
         print(
-          "❌ Failed to fetch projects: ${response.statusCode} - ${response.data}",
+          " Failed to fetch projects: ${response.statusCode} - ${response.data}",
         );
         return null;
       }
     } catch (e) {
-      print("❗ Dio exception during project fetch: $e");
+      print(" Dio exception during project fetch: $e");
       return null;
     }
   }
@@ -174,7 +174,7 @@ class NetworkService {
     final Box authBox = Hive.box('authBox');
     final String? accessToken = authBox.get('authToken');
     if (accessToken == null) {
-      print("❌ Cannot proceed without token");
+      print(" Cannot proceed without token");
       return null;
     }
 
@@ -204,16 +204,16 @@ class NetworkService {
       print(response.data);
 
       if (response.statusCode == 200) {
-        print("✅ User fetched successfully!");
+        print(" User fetched successfully!");
         return response;
       } else {
         print(
-          "❌ Failed to fetch user: ${response.statusCode} - ${response.data}",
+          " Failed to fetch user: ${response.statusCode} - ${response.data}",
         );
         return null;
       }
     } catch (e) {
-      print("❗ Dio exception during user fetch: $e");
+      print(" Dio exception during user fetch: $e");
       return null;
     }
   }
@@ -223,7 +223,7 @@ class NetworkService {
     final Box authBox = Hive.box('authBox');
     final String? accessToken = authBox.get('authToken');
     if (accessToken == null) {
-      print("❌ Cannot proceed without token");
+      print(" Cannot proceed without token");
       return [];
     }
 
@@ -262,11 +262,11 @@ class NetworkService {
         }
         return results.map((item) => TeamMember.fromJson(item)).toList();
       } else {
-        print("❌ Failed to fetch team list: ${response.statusCode}");
+        print(" Failed to fetch team list: ${response.statusCode}");
         return [];
       }
     } catch (e) {
-      print("❗ Exception during team fetch: $e");
+      print(" Exception during team fetch: $e");
       return [];
     }
   }
@@ -280,7 +280,7 @@ class NetworkService {
     final Box authBox = Hive.box('authBox');
     final String? accessToken = authBox.get('authToken');
     if (accessToken == null) {
-      print("❌ Cannot proceed without token");
+      print(" Cannot proceed without token");
       return false;
     }
 
@@ -315,7 +315,7 @@ class NetworkService {
       );
       return response.statusCode == 200;
     } catch (e) {
-      print("❗ Exception during assign work: $e");
+      print("Exception during assign work: $e");
       return false;
     }
   }
@@ -339,7 +339,7 @@ class NetworkService {
     final Box authBox = Hive.box('authBox');
     final String? accessToken = authBox.get('authToken');
     if (accessToken == null) {
-      print("❌ Cannot proceed without token");
+      print(" Cannot proceed without token");
       return null;
     }
 
@@ -371,7 +371,7 @@ class NetworkService {
         ),
       );
 
-      print("📦 Project Details API Response (${response.statusCode}):");
+      print(" Project Details API Response (${response.statusCode}):");
       print(response.data);
 
       if (response.statusCode == 200) {
@@ -386,12 +386,12 @@ class NetworkService {
         return details;
       } else {
         print(
-          "❌ Failed to fetch project details: ${response.statusCode} - ${response.data}",
+          " Failed to fetch project details: ${response.statusCode} - ${response.data}",
         );
         return null;
       }
     } catch (e, stack) {
-      print("❗ Dio exception during project details fetch: $e");
+      print(" Dio exception during project details fetch: $e");
       print(stack);
       return null;
     }
